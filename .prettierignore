@@ -1,0 +1,11 @@
+node_modules
+package-lock.json
+
+# prebuild 산출물. app.json을 기준으로 매번 다시 생성되므로 포맷 대상이 아니다.
+android
+ios
+.expo
+dist
+
+# 손으로 정렬한 표를 prettier가 흐트러뜨리지 않도록 문서는 제외한다.
+*.md
