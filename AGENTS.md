@@ -45,6 +45,7 @@ npm run typecheck
 | 배포 웹 주소 | 미정. 로컬 개발 서버를 바라보고 있음 |
 | 스토어 계정 | 개인·조직 여부 미정 |
 | 앱 아이콘·스플래시 | Expo 기본값. 디자인팀 전달 대기 |
+| 상태바 스타일 | Android가 edge-to-edge라 `expo-status-bar`의 `style`이 무시된다(`StatusBarModule: Ignored status bar change`). 지금은 아이콘이 흰 배경에 묻혀 안 보인다. 배경색이 정해져야 대비를 맞출 수 있어 디자인 확정까지 보류 |
 
 ---
 
