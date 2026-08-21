@@ -1,0 +1,36 @@
+name: ✨ 기능 제안
+description: 앱 셸에 필요한 기능이나 개선
+title: 'feat: '
+labels: [feat]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **화면·라우팅·상태 관리·API 호출은 [web 저장소](https://github.com/urineun-jigeum-bildeujung/web/issues/new/choose)가 담당합니다.**
+        이 저장소가 맡는 것은 웹이 할 수 없는 일뿐입니다.
+  - type: textarea
+    id: problem
+    attributes:
+      label: 어떤 문제 / 필요
+      description: 보호자가 앱에서 겪는 무슨 불편을 푸는지.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 제안
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 고려한 대안 (선택)
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: 범위 점검
+      description: 이 저장소가 맡을 일이 맞는지 스스로 확인. 애매하면 web에서 하는 편이 대체로 맞습니다.
+      options:
+        - label: 웹에서는 할 수 없는 일이다 (네이티브 권한·기기 기능·앱 생명주기·스토어)
+        - label: 화면이나 비즈니스 로직을 이 저장소로 가져오지 않는다
+        - label: 웹과 앱에서 동작이 갈리지 않는다 (갈린다면 사유를 본문에 적었다)

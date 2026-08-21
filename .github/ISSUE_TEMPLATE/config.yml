@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 웹 화면·기능 관련 이슈
+    url: https://github.com/urineun-jigeum-bildeujung/web/issues/new/choose
+    about: 화면·라우팅·API 호출은 web 저장소가 담당합니다. 이 저장소는 앱 셸만 다룹니다.
