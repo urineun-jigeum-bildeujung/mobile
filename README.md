@@ -17,6 +17,18 @@ Metro 번들러가 뜨면 `a`(Android) 또는 `i`(iOS, macOS만)를 누른다.
 npx expo run:android
 ```
 
+### 스크립트
+
+| 명령 | 설명 |
+| --- | --- |
+| `npm start` | Metro 번들러 실행 |
+| `npm run android` | Android 네이티브 빌드 후 실행 |
+| `npm run ios` | iOS 네이티브 빌드 후 실행 (macOS만) |
+| `npm run typecheck` | 타입 검사 |
+| `npm run lint` | ESLint 검사 |
+| `npm run format` | Prettier 포맷 적용 |
+| `npm run format:check` | 포맷 위반 확인 (수정 없음) |
+
 ## 접속 주소
 
 WebView가 불러올 주소는 `EXPO_PUBLIC_WEB_URL`로 정한다. 값이 없으면 로컬 개발 서버를 바라본다.

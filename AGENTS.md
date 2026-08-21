@@ -29,11 +29,27 @@ web 저장소의 [AGENTS.md](https://github.com/urineun-jigeum-bildeujung/web/bl
 
 ## 검증
 
+CI(`.github/workflows/ci.yml`)와 같은 순서로 돌립니다.
+
 ```bash
 npm run typecheck
 ```
 
-린트·테스트는 아직 없습니다. 화면이 늘어나면 그때 도입합니다.
+```bash
+npm run format:check
+```
+
+```bash
+npm run lint
+```
+
+**테스트는 아직 없습니다.** 화면이 늘어나면 도입합니다. CI에 Gradle 빌드도 넣지 않았습니다 — 로컬 첫 빌드가 9분 39초 걸려 매 PR마다 돌릴 이득이 적습니다. 다만 **`app.json`을 바꿨다면 반드시 직접 빌드해 확인하십시오.** 네이티브 설정은 CI가 잡아주지 않습니다.
+
+```bash
+npx expo run:android
+```
+
+커밋하면 husky가 형식을 검사하고 브랜치명의 이슈 번호를 메시지에 채웁니다. `--no-verify`로 우회하지 마십시오.
 
 ## 확정되지 않은 것
 
