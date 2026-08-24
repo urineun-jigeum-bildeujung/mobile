@@ -18,7 +18,7 @@ web 저장소의 [AGENTS.md](https://github.com/urineun-jigeum-bildeujung/web/bl
 - **단순함 우선.** 요청받지 않은 기능을 추가하지 마십시오. 화면 하나짜리 앱에 추상화를 세우지 마십시오.
 - **한국어 문장은 콜론(:)으로 끝내지 마십시오.** 마침표·물음표·느낌표로 끝냅니다.
 - **새 소스 파일 첫 줄에 역할을 설명하는 한국어 주석**을 답니다.
-- **커밋은 `유형(#이슈번호): 내용` 형식**이고 한글로 씁니다. AI 표기(`Co-Authored-By`, `Generated with`, 🤖)를 남기지 않습니다.
+- **커밋은 `유형(#이슈번호): 내용` 형식**이고 한글로 씁니다. **종결어미 없이 명사형으로 끝내십시오** — `feat(#12): 딥링크로 상품 상세 열기`. 문서 종류별 어투는 web 저장소 [git-convention](https://github.com/urineun-jigeum-bildeujung/web/blob/dev/docs/conventions/git-convention.md)의 "문체" 절을 따릅니다. AI 표기(`Co-Authored-By`, `Generated with`, 🤖)를 남기지 않습니다.
 - 파일·폴더 이름은 kebab-case입니다.
 
 ## 네이티브 폴더
