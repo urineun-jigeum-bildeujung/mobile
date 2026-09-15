@@ -76,3 +76,4 @@ npx expo prebuild --clean
 | `App.tsx` | WebView 화면 |
 | `src/config/web-url.ts` | 접속할 웹 주소 결정 |
 | `src/hooks/use-webview-back.ts` | Android 하드웨어 뒤로가기 처리 |
+| `plugins/with-debug-network-security-config.js` | 디버그 빌드에서만 사용자 설치 CA를 신뢰하게 하는 config plugin |
