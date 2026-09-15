@@ -12,7 +12,7 @@
 
 ### 개발 환경
 
-- 디버그 빌드에서만 사용자가 기기에 설치한 CA를 신뢰하도록 Network Security Config를 넣었다. 사이버보안팀이 Burp로 앱 트래픽을 보려면 필요한데, Android 7.0(API 24)부터는 사용자 CA를 신뢰하지 않아 HTTPS가 핸드셰이크에서 끊겼다. `minSdkVersion`이 24라 대상 기기 전부가 해당한다. `<debug-overrides>`는 `android:debuggable="true"`인 빌드에서만 적용되므로 릴리스에는 실리지 않는다 — 실제로 릴리스 병합 매니페스트에 `debuggable`이 없는 것을 빌드로 확인했다. `android/`는 prebuild가 다시 만들어 손으로 고칠 수 없어 config plugin(`plugins/with-debug-network-security-config.js`)으로 넣고 `app.json`에 등록했다. `expo-build-properties`로는 안 된다 — 그 플러그인의 Android 옵션에 `usesCleartextTraffic`은 있어도 `networkSecurityConfig`가 없다 (#9)
+- 디버그 빌드에서만 사용자가 기기에 설치한 CA를 신뢰하도록 Network Security Config를 넣었다. 사이버보안팀이 Burp로 앱 트래픽을 보려면 필요한데, Android 7.0(API 24)부터는 사용자 CA를 신뢰하지 않아 HTTPS가 핸드셰이크에서 끊겼다. `minSdkVersion`이 24라 대상 기기 전부가 해당한다. `<debug-overrides>`는 `android:debuggable="true"`인 빌드에서만 적용된다. 설정 파일과 매니페스트 참조 자체는 릴리스 산출물에도 들어가지만, 릴리스에는 `debuggable`이 없어 Android가 그 블록을 무시하므로 **사용자 CA 신뢰가 적용되지 않는다** — 릴리스 병합 매니페스트에 `networkSecurityConfig`는 있고 `debuggable`은 없는 것을 빌드로 확인했다. `android/`는 prebuild가 다시 만들어 손으로 고칠 수 없어 config plugin(`plugins/with-debug-network-security-config.js`)으로 넣고 `app.json`에 등록했다. `expo-build-properties`로는 안 된다 — 그 플러그인의 Android 옵션에 `usesCleartextTraffic`은 있어도 `networkSecurityConfig`가 없다 (#9)
 
 ## 2026-08-24
 
