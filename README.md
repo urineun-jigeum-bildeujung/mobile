@@ -44,6 +44,15 @@ WebView가 불러올 주소는 `EXPO_PUBLIC_WEB_URL`로 정합니다. 값이 없
 cp .env.example .env.local
 ```
 
+**로컬 백엔드까지 붙여 볼 때는 Android도 `localhost`로 엽니다.** 백엔드 CORS가 `http://localhost:3000` origin만 허용해 `10.0.2.2:3000`에서 부른 API는 전부 막힙니다. `.env.local`에 `EXPO_PUBLIC_WEB_URL=http://localhost:3000`을 넣고, 에뮬레이터의 localhost가 호스트로 가도록 포트를 연결합니다. 에뮬레이터를 다시 켜면 연결이 사라지니 다시 겁니다.
+
+```bash
+adb reverse tcp:3000 tcp:3000   # 웹
+adb reverse tcp:8080 tcp:8080   # 백엔드 게이트웨이
+```
+
+Metro 기본 포트 8081을 다른 것이 쓰고 있으면 `npx expo run:android --port 8090`처럼 바꾸고 `adb reverse tcp:8081 tcp:8090`으로 앱의 기본 주소를 그 포트로 보냅니다.
+
 ## 사전 준비
 
 ### Android (Windows·macOS)
