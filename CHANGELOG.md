@@ -10,6 +10,10 @@
 
 ## 2026-09-23
 
+### 수정
+
+- **디버그 빌드가 Metro와 로컬 웹을 못 열던 문제 해결.** #9에서 넣은 Network Security Config가 매니페스트에 걸리면 Android는 `usesCleartextTraffic`을 무시하고 그 파일만 보는데, 파일에 `<base-config>`가 없어 targetSdk 28 이상 기본값대로 평문 HTTP가 전부 막혔다. RN 디버그 매니페스트의 `usesCleartextTraffic="true"`가 소용없어져 "Unable to load script"가 떴고 웹뷰의 `http://10.0.2.2:3000`도 같은 이유로 막혔다. 디버그 소스셋에만 평문을 허용한 같은 이름의 파일을 두어 리소스 병합에서 main을 덮게 했다. 릴리스는 평문 금지·시스템 CA만 그대로다 (#12)
+
 ### 추가
 
 - **Android 앱이 FCM 푸시를 받는다.** 웹뷰 안의 웹은 Push API가 없어 토큰을 만들 수 없고, 웹이 붙인 30초 폴링(web #395)은 앱이 열려 있을 때만 돌아 닫아 둔 앱에는 알림이 닿지 않았다. 웹의 설정에서 알림 스위치를 켜면 웹이 `golaju:request-push-token` 메시지로 요청하고, 앱이 `expo-notifications`로 권한을 물어 받은 기기 토큰을 `golaju:push-token` 이벤트로 돌려주면 웹이 로그인 세션으로 서버에 등록한다 — 앱은 액세스 토큰을 모르니 등록은 웹 몫이고, 스위치가 켜질 때만 물어야 앱을 열자마자 권한 프롬프트가 뜨지 않는다. 이 앱이 푸시를 받을 수 있는지는 문서를 읽기 전에 `window.golajuNative.pushSupported`로 알려 웹이 설정 스위치를 잠글지 정한다. 앱이 열려 있을 때 온 푸시는 OS 배너를 띄우지 않고 `golaju:push-received`로 웹에 알려 웹이 토스트와 종의 점을 갱신한다. 브라우저의 포그라운드 FCM과 같은 역할이라 같은 알림이 두 번 뜨지 않는다. 닫혀 있을 때는 OS 알림이 뜬다. 네이티브 설정은 `app.json`(`expo-notifications` 플러그인·`android.googleServicesFile`)으로 했고 `google-services.json`은 git에 넣지 않는다. iOS는 APNs가 유료 개발자 계정에 묶여 있어 이번에 넣지 않았다 (#11)
