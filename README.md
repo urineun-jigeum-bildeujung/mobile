@@ -61,6 +61,14 @@ Android Studio를 설치하고 환경 변수 두 개를 잡습니다. Windows �
 
 Xcode와 CocoaPods가 필요합니다. Windows에서는 로컬 빌드가 불가능합니다.
 
+### 푸시 알림 (Android)
+
+Android 빌드에는 Firebase의 `google-services.json`이 필요합니다. [Firebase 콘솔](https://console.firebase.google.com/)의 프로젝트 설정에서 Android 앱(패키지 `com.golajugaenyang.app`)을 등록해 내려받고 저장소 루트에 둡니다. `app.json`의 `android.googleServicesFile`이 이 경로를 가리키며, 파일은 git에 넣지 않습니다.
+
+토큰은 앱이 알아서 만들지 않습니다. 웹의 설정에서 알림 스위치를 켜면 웹이 앱에 요청하고, 앱이 권한을 물어 받은 FCM 토큰을 웹에 돌려주면 웹이 로그인 세션으로 서버에 등록합니다. 앱이 열려 있을 때 온 푸시는 OS 배너 대신 웹에 알려 웹이 토스트와 종의 점으로 보여주고, 닫혀 있을 때는 OS 알림이 뜹니다. iOS는 APNs가 유료 개발자 계정에 묶여 있어 토큰을 받지 않고(스위치가 잠깁니다), 웹의 폴링으로만 받습니다.
+
+에뮬레이터는 **Google Play 이미지**여야 토큰이 발급됩니다. Play 서비스가 없으면 토큰을 못 받고 웹이 폴링으로 돌아갑니다.
+
 ## 네이티브 폴더
 
 `android/`·`ios/`는 **커밋하지 않습니다.** Expo의 CNG(Continuous Native Generation) 방식이라 `app.json`을 기준으로 매번 생성합니다. 네이티브 설정을 바꿔야 하면 폴더를 직접 고치는 대신 `app.json`이나 config plugin으로 옮깁니다. 직접 고친 내용은 다음 prebuild에서 사라집니다.
@@ -76,4 +84,6 @@ npx expo prebuild --clean
 | `App.tsx` | WebView 화면 |
 | `src/config/web-url.ts` | 접속할 웹 주소 결정 |
 | `src/hooks/use-webview-back.ts` | Android 하드웨어 뒤로가기 처리 |
+| `src/hooks/use-android-push.ts` | 웹의 요청에 Android FCM 토큰을 돌려주고, 열려 있을 때 온 푸시를 웹에 알림 |
+| `src/lib/web-event.ts` | 앱과 웹이 주고받는 신호 이름과 `injectJavaScript`·`postMessage` 변환 |
 | `plugins/with-debug-network-security-config.js` | 디버그 빌드에서만 사용자 설치 CA를 신뢰하게 하는 config plugin |
