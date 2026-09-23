@@ -7,12 +7,15 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import WebView from 'react-native-webview';
 
 import { WEB_URL } from './src/config/web-url';
+import { PUSH_SUPPORTED, useAndroidPush } from './src/hooks/use-android-push';
 import { useWebViewBack } from './src/hooks/use-webview-back';
+import { toNativeInfoScript } from './src/lib/web-event';
 
 export default function App() {
   const webViewRef = useRef<WebView>(null);
   const [isLoading, setIsLoading] = useState(true);
   const syncCanGoBack = useWebViewBack(webViewRef);
+  const handleWebMessage = useAndroidPush(webViewRef);
 
   return (
     <SafeAreaProvider>
@@ -25,6 +28,9 @@ export default function App() {
           style={styles.webView}
           onNavigationStateChange={(state) => syncCanGoBack(state.canGoBack)}
           onLoadEnd={() => setIsLoading(false)}
+          // 웹이 설정 화면을 그리기 전에 이 앱이 푸시를 받을 수 있는지 알아야 한다
+          injectedJavaScriptBeforeContentLoaded={toNativeInfoScript(PUSH_SUPPORTED)}
+          onMessage={handleWebMessage}
         />
 
         {isLoading && (
